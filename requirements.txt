@@ -10,3 +10,4 @@ llama-index-core
 llama-index-llms-anthropic
 llama-index-embeddings-huggingface
 sentence-transformers
+Flask
