@@ -97,6 +97,7 @@ main {
 
 .feature-card {
     background: rgb(255, 0, 0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -304,31 +305,95 @@ footer {
 /* Chatbot styles */
 #chatbot-widget {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 350px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    bottom: 40px;
+    right: 40px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.25), 0 6px 20px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     background-color: rgb(255, 255, 255);
-    transition: height 0.3s ease;
+    transition: all 0.3s ease;
+    animation: float 3s ease-in-out infinite;
 }
 
+/* Add this new animation */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Circular chatbot icon when collapsed */
 .chatbot-collapsed {
-    height: 50px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
+.chatbot-collapsed .chatbot-header {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.chatbot-collapsed .chatbot-header span {
+    display: none;
+}
+
+.chatbot-collapsed .chatbot-body {
+    display: none;
+}
+
+/* Icon for collapsed state */
+.chatbot-collapsed .chatbot-header:before {
+    content: "";
+    display: block;
+    background-image: url('husky-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 55px;
+    height: 55px;
+}
+
+/* Expanded chatbot remains rectangular */
 .chatbot-expanded {
     height: 500px;
+    width: 350px;
+    border-radius: 10px;
+}
+
+.chatbot-expanded .chatbot-header {
+    border-radius: 10px 10px 0 0;
+    justify-content: space-between;
+}
+
+.chatbot-expanded .chatbot-header:before {
+    display: none;
+}
+
+.chatbot-expanded .chatbot-header span {
+    display: inline;
+}
+
+.chatbot-expanded .chatbot-body {
+    display: flex;
 }
 
 .chatbot-header {
-    background-color: red;
+    background-color: black;
     color: white;
     padding: 12px 15px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     cursor: pointer;
 }
@@ -424,7 +489,7 @@ footer {
 
 /* Make the chatbot responsive */
 @media (max-width: 600px) {
-    #chatbot-widget {
+    .chatbot-expanded {
         width: 90%;
         right: 5%;
         left: 5%;

@@ -15,6 +15,15 @@ document.addEventListener('DOMContentLoaded', function() {
         chatbotWidget.classList.toggle('chatbot-expanded');
     });
 
+    // Also make the entire header clickable when collapsed
+    document.querySelector('.chatbot-header').addEventListener('click', function(e) {
+        // Prevent toggling twice if the actual toggle button was clicked
+        if (e.target !== chatbotToggle && !chatbotToggle.contains(e.target)) {
+            chatbotWidget.classList.toggle('chatbot-collapsed');
+            chatbotWidget.classList.toggle('chatbot-expanded');
+        }
+    });
+
     // Handle send button click
     chatbotSend.addEventListener('click', handleUserMessage);
 

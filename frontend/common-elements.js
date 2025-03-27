@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const chatbotHTML = `
             <div id="chatbot-widget" class="chatbot-collapsed">
                 <div class="chatbot-header">
-                    <span>Chat with our husky 🐺</span>
+                    <span>Husky Helper</span>
                     <button id="chatbot-toggle">
                         <span class="open-icon">▲</span>
                         <span class="close-icon">▼</span>
