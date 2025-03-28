@@ -29,7 +29,7 @@ def build_chat_engine(rebuild=False, index_name="claude_index", chunked_dir=''):
     if not chunked_dir:
         chunked_dir = os.getenv('CHUNKDATA_DIR')
 
-    # Check if we need to build/rebuild the index
+    print("Building Chat Engine...")
     if rebuild or not index_exists(index_name):
         # Read all chunks from the HTML files
         print("Reading chunked HTML files...")

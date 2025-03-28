@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatbotSend = document.getElementById('chatbot-send');
     
     // Show welcome message
-    addBotMessage("👋 Hi there! I'm your AI assistant. Ask me anything about this website!");
+    addBotMessage("What's up Husky? I'm Pawsistant 🐾, How can I help today?");
 
     // Toggle chatbot open/closed
     chatbotToggle.addEventListener('click', function() {
@@ -53,11 +53,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to call your LLM API
     async function callLlmApi(query) {
-        // TODO: Replace with your actual LLM API call
-        return "This is where your LLM response will appear.";
+    try {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: query })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to get response');
+        }
+
+        const data = await response.json();
+        return data.response;
+    } catch (error) {
+        console.error('API Error:', error);
+        return "Sorry, I encountered an error. Please try again later.";
     }
+}
 
     function addUserMessage(text) {
         const messageDiv = document.createElement('div');
