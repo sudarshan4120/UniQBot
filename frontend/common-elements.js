@@ -36,11 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentPage !== 'contact.html') {
         const chatbotHTML = `
             <div id="chatbot-widget" class="chatbot-collapsed">
+                <div class="speech-bubble">Woof Woof!</div>
                 <div class="chatbot-header">
                     <span>Husky Helper</span>
                     <button id="chatbot-toggle">
-                        <span class="open-icon">▲</span>
-                        <span class="close-icon">▼</span>
+                        <img src="settings-icon.png" alt="Settings" class="settings-icon">
                     </button>
                 </div>
                 <div class="chatbot-body">

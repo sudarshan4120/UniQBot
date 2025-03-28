@@ -312,6 +312,7 @@ footer {
     background-color: rgb(255, 255, 255);
     transition: all 0.3s ease;
     animation: float 3s ease-in-out infinite;
+    overflow: visible;
 }
 
 /* Add this new animation */
@@ -353,16 +354,18 @@ footer {
     display: none;
 }
 
-/* Icon for collapsed state */
 .chatbot-collapsed .chatbot-header:before {
     content: "";
-    display: block;
+    position: absolute; /* Changed to absolute positioning */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Perfect centering */
     background-image: url('husky-icon.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 55px;
-    height: 55px;
+    width: 40px; /* Adjusted size - you can increase this */
+    height: 40px; /* Adjusted size - you can increase this */
 }
 
 /* Expanded chatbot remains rectangular */
@@ -410,15 +413,31 @@ footer {
     font-size: 16px;
 }
 
-.open-icon, .close-icon {
-    display: inline-block;
+.settings-icon {
     width: 20px;
-    text-align: center;
+    height: 20px;
+    display: inline-block;
 }
 
-.chatbot-collapsed .close-icon,
-.chatbot-expanded .open-icon {
-    display: none;
+#chatbot-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatbot-header {
+    background-color: black;
+    color: white;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
 }
 
 .chatbot-body {
@@ -519,4 +538,66 @@ footer {
     .features, .student-resources, .contact-content {
         grid-template-columns: 1fr;
     }
+}
+
+/* Speech bubble for collapsed chatbot */
+.chatbot-collapsed .speech-bubble {
+    position: absolute;
+    background-color: white;
+    border-radius: 24px;
+    padding: 10px 15px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    top: -70px;
+    left: -60px; /* Moved further left to use available space */
+    font-size: 12px;
+    font-family: 'Segoe UI', 'Calibri', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #444;
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+/* Cloud-style bubble tails */
+.chatbot-collapsed .speech-bubble:after,
+.chatbot-collapsed .speech-bubble:before {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Main tail bubble */
+.chatbot-collapsed .speech-bubble:after {
+    width: 18px;
+    height: 18px;
+    bottom: -20px;
+    left: 70%;
+}
+
+/* Secondary tail bubble */
+.chatbot-collapsed .speech-bubble:before {
+    width: 12px;
+    height: 12px;
+    bottom: -35px;
+    left: 75%;
+}
+
+/* Explicitly hide speech bubble when expanded */
+.chatbot-expanded .speech-bubble {
+    display: none !important;
+}
+
+/* Animation for speech bubble */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Show speech bubble on hover */
+.chatbot-collapsed:hover .speech-bubble {
+    display: block;
 }
