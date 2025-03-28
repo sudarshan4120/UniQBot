@@ -19,7 +19,6 @@ import utils  # This loads vars, do not remove
 import scrapper
 import preprocessing
 import model
-from backend import husky_app
 
 
 def run_data_pipeline():
@@ -37,5 +36,6 @@ if __name__ == "__main__":
         print("Starting RAG chatbot...")
         model.run_rag_claude()
     elif args.server:
+        from backend import husky_app
         print("Starting flask server...")
         husky_app.run()
