@@ -63,7 +63,7 @@ import utils  # This loads vars, do not remove
 import scrapper
 import preprocessing
 import model
-from app2 import RAGChatbot  # Import the GPT model implementation
+from model.openAi import RAGChatbot  # Import the GPT model implementation
 
 def run_data_pipeline():
     scrapper.run_scrapper()

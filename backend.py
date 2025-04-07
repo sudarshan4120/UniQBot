@@ -42,7 +42,7 @@
 
 from flask import Flask, send_from_directory, request, jsonify, make_response
 from model import run_rag_query, build_chat_engine
-from app2 import RAGChatbot
+from model.openAi import RAGChatbot
 import os
 import utils
 
