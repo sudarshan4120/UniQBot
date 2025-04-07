@@ -309,9 +309,9 @@ footer {
     right: 40px;
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.25), 0 6px 20px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    background-color: rgb(255, 255, 255);
+    background-color: #ffffff;
     transition: all 0.3s ease;
-    animation: float 3s ease-in-out infinite;
+    animation: float 3s ease-in-out ;
     overflow: visible;
 }
 
@@ -371,7 +371,7 @@ footer {
 /* Expanded chatbot remains rectangular */
 .chatbot-expanded {
     height: 500px;
-    width: 350px;
+    width: 600px;
     border-radius: 10px;
 }
 
@@ -600,4 +600,62 @@ footer {
 /* Show speech bubble on hover */
 .chatbot-collapsed:hover .speech-bubble {
     display: block;
+}
+
+/* Model selection buttons */
+.model-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+}
+
+.model-button {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.model-button:hover {
+    background-color: #f0f0f0;
+}
+
+.model-button.active {
+    border-color: red;
+    background-color: #ffebe9;
+    color: black;
+}
+
+/* Styling for the Save Settings button */
+#save-settings {
+    background-color: rgb(226, 43, 43); /* Red color to match your UI */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: auto;
+    display: inline-block;
+}
+
+#save-settings:hover {
+    background-color: rgb(210, 30, 30); /* Slightly darker on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#save-settings:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
