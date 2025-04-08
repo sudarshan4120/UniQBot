@@ -212,7 +212,7 @@ if __name__ == "__main__":
     # Simple CLI interface
     # Set your OpenAI API key
     # import os
-    # os.environ["OPENAI_API_KEY"] = "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"  # Replace with your actual API key
+    
     
     try:
         # Initialize the chatbot with controlled context size
