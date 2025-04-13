@@ -15,7 +15,6 @@ The system addresses challenges in accessing timely information by integrating w
 - 🤖 Integration with Claude Haiku and GPT-3.5 language models for high-quality responses
 - 📊 Superior performance metrics with Claude outperforming GPT-3.5 in accuracy and coherence
 - 🌐 User-friendly web interface for real-time interaction
-- 📋 Proper citation of information sources in responses
 - 🔄 Response optimization through prompt engineering
 
 ## Table of Contents
