@@ -34,6 +34,10 @@ if __name__ == "__main__":
         print("Running data pipeline...")
         run_data_pipeline()
         print("Data pipeline completed successfully!")
+    elif args.server:
+        from backend import husky_app
+        print(f"Starting flask server with {os.getenv('ACTIVE_MODEL')} model...")
+        husky_app.run()
     elif args.chatbot:
         print("Starting RAG chatbot...")
         if args.chatbot.lower() == "claude":
@@ -42,7 +46,3 @@ if __name__ == "__main__":
         elif args.chatbot.lower() == "gpt":
             print("Using GPT model...")
             model.run_rag_openai()
-    elif args.server:
-        from backend import husky_app
-        print(f"Starting flask server with {os.getenv('ACTIVE_MODEL')} model...")
-        husky_app.run()
