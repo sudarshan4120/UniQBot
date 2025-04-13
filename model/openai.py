@@ -7,18 +7,14 @@ import gc
 import os
 import tiktoken  
 from bs4 import BeautifulSoup
+from model import read_chunked_html  # Your existing function
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-os.getenv('OPENAI')
-
 
 
 class RAGChatbot:
-    def __init__(self, 
-                 openai_api_key=os.getenv("OPENAI_API_KEY", ""),
+    def __init__(self, faiss_index_path, chunks_folder, openai_api_key,
                  model_name="gpt-3.5-turbo",
                  embedding_model_name="sentence-transformers/all-MiniLM-L6-v2",
-                 faiss_index_path="/Users/sudarshanp/Desktop/shreya_bot/data/faiss_index-shreya.index",
-                 chunks_folder="/Users/sudarshanp/Desktop/shreya_bot/data/chunks",
                  max_chunks=5,  # Default number of chunks to retrieve
                  max_context_tokens=12000):  # Reserve tokens for context
         """
@@ -33,11 +29,6 @@ class RAGChatbot:
             max_chunks: Maximum number of chunks to retrieve
             max_context_tokens: Maximum tokens to use for context
         """
-        # Set up OpenAI client
-        if openai_api_key is None:
-            openai_api_key = os.environ.get("OPENAI_API_KEY")
-            if openai_api_key is None:
-                raise ValueError("OpenAI API key must be provided or set as OPENAI_API_KEY environment variable")
         
         self.client = OpenAI(api_key=openai_api_key)
         self.model_name = model_name
@@ -50,26 +41,15 @@ class RAGChatbot:
         # Load the FAISS index
         # print(f"Loading FAISS index from {faiss_index_path}...")
         self.index = faiss.read_index(faiss_index_path)
-        
-        # Load the chunks from HTML files
+
+        # Load the chunks
         print(f"Loading text chunks from {chunks_folder}...")
-        # Load chunked HTML files
-        files = [os.path.join(chunks_folder, f) for f in os.listdir(chunks_folder)]
-        self.chunks = []
-        for file in files:
-            with open(file, "r", encoding="utf-8") as f:
-                soup = BeautifulSoup(f, "html.parser")
-                # Each paragraph in the chunked HTML is considered a separate chunk
-                self.chunks.extend([p.get_text() for p in soup.find_all('p')])
-        
+        chunk_tuples = read_chunked_html(chunks_folder)
+        self.chunks = [chunk[1] for chunk in chunk_tuples]  # Extract just the text
         print(f"Loaded {len(self.chunks)} chunks.")
-        
-        # Load the embedding model for query encoding
-        # print(f"Loading embedding model {embedding_model_name}...")
+
+        # Keep the embedding model initialization
         self.embedding_model = SentenceTransformer(embedding_model_name)
-        
-        # Run garbage collection
-        gc.collect()
         
         print("RAG Chatbot initialization complete!")
     
@@ -167,7 +147,6 @@ class RAGChatbot:
         
         # Calculate and log total tokens
         total_tokens = self.num_tokens(system_message) + self.num_tokens(user_message)
-        print(f"Total tokens in prompt: {total_tokens}")
         
         return messages
     
@@ -205,31 +184,3 @@ class RAGChatbot:
         
         # Step 5: Generate and return the response
         return self.generate_response(messages)
-
-
-# Example usage with Streamlit interface
-if __name__ == "__main__":
-    # Simple CLI interface
-    # Set your OpenAI API key
-    # import os
-    
-    
-    try:
-        # Initialize the chatbot with controlled context size
-        chatbot = RAGChatbot(
-            max_chunks=5,  # Start with retrieving 5 chunks
-            max_context_tokens=10000  # Reserve ~10K tokens for context (leaving ~6K for system prompt and completion)
-        )
-        
-        print("RAG Chatbot initialized. Type 'exit' to quit.")
-        while True:
-            query = input("\nYou: ")
-            if query.lower() in ["exit", "quit", "bye","thanks"]:
-                break
-            
-            print("\nThinking...")
-            response = chatbot.chat(query)
-            print(f"\nAssistant: {response}")
-    
-    except Exception as e:
-        print(f"Error initializing chatbot: {e}")

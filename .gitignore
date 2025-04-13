@@ -23,6 +23,7 @@ wheels/
 share/python-wheels/
 data/
 claude_index/
+faiss_index.index
 *.egg-info/
 .installed.cfg
 *.egg

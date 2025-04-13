@@ -11,3 +11,4 @@ llama-index-llms-anthropic
 llama-index-embeddings-huggingface
 sentence-transformers
 Flask
+faiss-cpu

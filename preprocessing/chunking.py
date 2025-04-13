@@ -5,7 +5,7 @@ from nltk.tokenize import sent_tokenize
 from llama_index.core.text_splitter import TokenTextSplitter
 
 # Ensure required NLTK package is downloaded
-nltk.download('punkt')
+nltk.download('punkt', quiet=True)
 
 
 def extract_text_from_html(cleaned_html):
