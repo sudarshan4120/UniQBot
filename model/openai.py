@@ -7,6 +7,7 @@ import gc
 import os
 import tiktoken  
 from bs4 import BeautifulSoup
+from model import read_chunked_html  # Your existing function
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 
@@ -40,26 +41,15 @@ class RAGChatbot:
         # Load the FAISS index
         # print(f"Loading FAISS index from {faiss_index_path}...")
         self.index = faiss.read_index(faiss_index_path)
-        
-        # Load the chunks from HTML files
+
+        # Load the chunks
         print(f"Loading text chunks from {chunks_folder}...")
-        # Load chunked HTML files
-        files = [os.path.join(chunks_folder, f) for f in os.listdir(chunks_folder)]
-        self.chunks = []
-        for file in files:
-            with open(file, "r", encoding="utf-8") as f:
-                soup = BeautifulSoup(f, "html.parser")
-                # Each paragraph in the chunked HTML is considered a separate chunk
-                self.chunks.extend([p.get_text() for p in soup.find_all('p')])
-        
+        chunk_tuples = read_chunked_html(chunks_folder)
+        self.chunks = [chunk[1] for chunk in chunk_tuples]  # Extract just the text
         print(f"Loaded {len(self.chunks)} chunks.")
-        
-        # Load the embedding model for query encoding
-        # print(f"Loading embedding model {embedding_model_name}...")
+
+        # Keep the embedding model initialization
         self.embedding_model = SentenceTransformer(embedding_model_name)
-        
-        # Run garbage collection
-        gc.collect()
         
         print("RAG Chatbot initialization complete!")
     
@@ -157,7 +147,6 @@ class RAGChatbot:
         
         # Calculate and log total tokens
         total_tokens = self.num_tokens(system_message) + self.num_tokens(user_message)
-        print(f"Total tokens in prompt: {total_tokens}")
         
         return messages
     

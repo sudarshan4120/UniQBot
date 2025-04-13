@@ -4,6 +4,7 @@ if not os.getenv('ENV_STATUS') == '1':
     import utils  # This loads vars, do not remove
 from model.claude import *
 from model.openai import *
+from model.openai_dataindex import build_knowledge_base
 
 # Global chat engine variable [claude, gpt]
 _chat_engine = [None, None]
@@ -102,15 +103,16 @@ def run_rag_claude(rebuild=False, index_name="claude_index", chunked_dir=''):
 
 def build_chat_engine_openai():
     global _chat_engine
-
     if _chat_engine[1] is not None:
         return _chat_engine[1]
+
+    build_knowledge_base()
 
     # Initialize the GPT chatbot with config values
     _chat_engine[1] = RAGChatbot(
         openai_api_key=os.getenv("OPENAI_API_KEY"),
         model_name=os.getenv("OPENAI_MODEL"),
-        faiss_index_path=os.path.join(os.getenv("HOME"), "data/faiss_index-shreya.index"),
+        faiss_index_path=os.path.join(os.getenv("HOME_DIR"), "faiss_index.index"),
         chunks_folder=os.getenv("CHUNKDATA_DIR")
     )
     return _chat_engine[1]
