@@ -46,6 +46,7 @@ class Manager:
 
         # Other custom Vars here - if any
         os.environ['HOME_DIR'] = os.path.dirname(self.utils_dir)
+        os.environ['ACTIVE_MODEL'] = "claude"
 
         # status set for scripts to verify
         os.environ['ENV_STATUS'] = '1'
@@ -59,15 +60,11 @@ class Manager:
     def set_model(self, model_name):
         """Set the currently selected model (claude or gpt)"""
         if model_name in ["claude", "gpt"]:
-            self.selected_model = model_name
-            print(f"Model set to: {model_name}")
+            os.environ['ACTIVE_MODEL'] = model_name
+            print(f"Model set to: {os.getenv('ACTIVE_MODEL')}")
         else:
-            print(f"Invalid model name: {model_name}. Using default (claude).")
-            self.selected_model = "claude"
-
-    def get_model(self):
-        """Get the currently selected model"""
-        return self.selected_model
+            print(f"Invalid model name: {os.getenv('ACTIVE_MODEL')}. Using default (claude).")
+            os.environ['ACTIVE_MODEL'] = "claude"
 
     def __read_config_section(self, config, section_name):
         for key, value in config[section_name].items():
@@ -81,9 +78,9 @@ class Manager:
         config = configparser.ConfigParser()
 
         config['Settings'] = {
-            'rawdata_dir': '/data/scraped_pages',
-            'cleandata_dir': '/data/cleaned_html',
-            'chunkdata_dir': '/data/chunks',
+            'rawdata_dir': 'data/scraped_pages',
+            'cleandata_dir': 'data/cleaned_html',
+            'chunkdata_dir': 'data/chunks',
             'anthropic_model': "claude-3-haiku-20240307",
             'anthropic_api_key': '',
             'openai_model': 'gpt-3.5-turbo',
