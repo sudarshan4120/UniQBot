@@ -1,7 +1,9 @@
-# RAG Chatbot for Northeastern OGS
-UniQbot is an AI-powered chatbot designed to enhance document Q&A capabilities for Northeastern University's Office of Global Services (OGS). The system leverages Retrieval-Augmented Generation (RAG) to provide instant, reliable answers to student queries, reducing dependency on office hours and improving overall accessibility to OGS services.
+# PAWSISTANT
+> RAG Chatbot for Northeastern University
 
-![Website HomePage](media/Homepage.png)
+Pawsistant is an AI-powered chatbot designed to enhance document Q&A capabilities for Northeastern University's Office of Global Services (OGS). The system uses Retrieval-Augmented Generation (RAG) to provide instant, reliable answers to student queries, reducing dependency on office hours and improving overall accessibility to OGS services.
+
+![Website HomePage](media/chatbot.gif)
 
 ## Overview
 UniQbot addresses the challenge of accessing timely information from the OGS due to high demand and limited office hours. By integrating web scraping, sophisticated preprocessing, and advanced language models, the chatbot provides accurate, contextually-aware responses to international student queries about immigration procedures, visa guidelines, and university policies.
