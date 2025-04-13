@@ -13,7 +13,6 @@ The system addresses challenges in accessing timely information by integrating w
 - 🔍 Advanced retrieval system using LlamaIndex and FAISS vector database for efficient semantic search
 - 📚 Knowledge base built from OGS website content with hybrid chunking strategies
 - 🤖 Integration with Claude Haiku and GPT-3.5 language models for high-quality responses
-- 📊 Superior performance metrics with Claude outperforming GPT-3.5 in accuracy and coherence
 - 🌐 User-friendly web interface for real-time interaction
 - 🔄 Response optimization through prompt engineering
 
