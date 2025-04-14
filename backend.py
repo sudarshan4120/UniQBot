@@ -1,3 +1,13 @@
+"""
+PROPRIETARY SOFTWARE - NOT FOR DISTRIBUTION
+Copyright © 2025 Naman Singhal
+
+This code is protected under a strict proprietary license.
+Unauthorized use, reproduction, or distribution is prohibited.
+For licensing inquiries or authorized access, visit:
+https://github.com/namansnghl/Pawsistant
+"""
+
 from flask import Flask, send_from_directory, request, jsonify, make_response
 from model import run_rag_query, run_rag_query_openai, build_chat_engine, build_chat_engine_openai
 import os
