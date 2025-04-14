@@ -1,6 +1,6 @@
 # PROPRIETARY SOFTWARE LICENSE
 
-Copyright © 2025 NAMAN SINGHAL  
+Copyright © 2025 [NAMAN SINGHAL](https://github.com/namansnghl/)  
 All rights reserved worldwide.
 
 ## RESTRICTED ACCESS NOTICE
