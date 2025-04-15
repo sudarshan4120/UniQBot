@@ -17,6 +17,7 @@ config_manager = Manager()
 def import_settings():
     print("Setting Configurations")
     config_manager.load_vars()
+    Manager.load_prereqs()
 
 
 # Initialize settings when the module is imported

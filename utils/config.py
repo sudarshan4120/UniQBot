@@ -61,6 +61,17 @@ class Manager:
         # status set for scripts to verify
         os.environ['ENV_STATUS'] = '1'
 
+    @staticmethod
+    def load_prereqs():
+        paths = [
+            os.getenv("rawdata_dir".upper()),
+            os.getenv("cleandata_dir".upper()),
+            os.getenv("chunkdata_dir".upper())
+        ]
+
+        for path in paths:
+            os.makedirs(path, exist_ok=True)
+
     def reset_config(self):
         print("Resetting Configuration")
         os.remove(self.file)
