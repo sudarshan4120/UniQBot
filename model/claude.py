@@ -9,6 +9,7 @@ https://github.com/namansnghl/Pawsistant
 """
 
 import os
+import torch
 from bs4 import BeautifulSoup
 from llama_index.core import Document, Settings
 from llama_index.core import VectorStoreIndex
@@ -67,10 +68,20 @@ def build_rag_index(chunks, index_name="my_rag_index"):
         temperature=0.2,
     )
 
+    if torch.backends.mps.is_available():
+        device = torch.device("mps")
+        print("Using MPS (Apple Silicon) for acceleration")
+    elif torch.cuda.is_available():
+        device = torch.device("cuda")
+        print("Using CUDA for acceleration")
+    else:
+        device = torch.device("cpu")
+        print("GPU acceleration not available, using CPU")
+
     # Use HuggingFace embeddings with MPS acceleration
     embed_model = HuggingFaceEmbedding(
         model_name="BAAI/bge-small-en",
-        device="mps",  # Use Metal Performance Shaders on Apple Silicon
+        device=device,  # Use Metal Performance Shaders on Apple Silicon
         embed_batch_size=16  # Optimize batch size for MPS
     )
 
@@ -115,10 +126,20 @@ def create_chat_engine(index_name="my_rag_index"):
         temperature=0.2,
     )
 
+    if torch.backends.mps.is_available():
+        device = torch.device("mps")
+        print("Using MPS (Apple Silicon) for acceleration")
+    elif torch.cuda.is_available():
+        device = torch.device("cuda")
+        print("Using CUDA for acceleration")
+    else:
+        device = torch.device("cpu")
+        print("GPU acceleration not available, using CPU")
+
     # Use HuggingFace embeddings with MPS acceleration
     embed_model = HuggingFaceEmbedding(
         model_name="BAAI/bge-small-en",
-        device="mps",
+        device=device,
         embed_batch_size=16
     )
 
