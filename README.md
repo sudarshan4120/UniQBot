@@ -125,6 +125,7 @@ python app.py --chatbot gpt
 ```bash
 python app.py --server
 ```
+Once the server starts the web interface will be available at `http://127.0.0.1:5000/` in your browser.
 
 # Troubleshooting
 1. **API Key Errors** 
@@ -147,6 +148,16 @@ Error 403: Forbidden
 Error 404: Page Not Found
 ```
 **Solution** - Check that the website allows scraping and that the URLs in your sitemap are valid. Consider adding delays between requests or implementing a user-agent rotation to avoid being blocked. Note that web scrapers often become outdated over time as websites change their structure or security measures. If you encounter persistent errors, you may need to update your scraper's browser headers, user agents, or request patterns to match current web standards.
+
+4. **Port 5000 Already in Use**
+```
+ERROR: Address already in use
+ERROR: The address is already in use, please try another port.
+```
+**Solution** - Identify and close the application using port 5000:
+- On Mac/Linux: Run `lsof -i :5000` to find the process ID, then `kill <PID>` to terminate it.
+- On Windows: Use Task Manager to identify and end the process using port `5000`.
+- Alternatively, you can modify your application to use a different port if available.
 
 
 # License
