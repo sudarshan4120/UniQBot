@@ -49,9 +49,10 @@ The system addresses challenges in accessing timely information by integrating w
 - **Repository access**
   - Option 1: Clone with Git
   - Option 2: Download as ZIP
-    - Visit the repository page
-    - Click the "Code" button, then "Download ZIP"
-    - Extract the ZIP file to your preferred location
+ 
+- **API Access**
+  - Claude API key for Claude model usage, OpenAI API key for ChatGPT.
+  - Note: Web server needs both; CLI needs only the key for your chosen model.
 
 ## Setup Instructions
 Check if Python is installed and verify version
