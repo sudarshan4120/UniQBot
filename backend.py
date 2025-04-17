@@ -56,6 +56,34 @@ def chat_api():
         return jsonify({"error": str(e)}), 500
 
 
+@husky_app.route("/api/get-model")
+def get_model():
+    # Get the current model from environment variables, default to 'claude'
+    model = os.getenv("ACTIVE_MODEL", "claude")
+    return jsonify({"model": model})
+
+
+@husky_app.route("/api/update-model", methods=["POST"])
+def update_model():
+    if request.method == "OPTIONS":  # Handle preflight requests
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
+        response.headers.add("Access-Control-Allow-Methods", "POST")
+        return response
+
+    data = request.json
+    model = data.get("model", "claude")
+
+    # Update the environment variable
+    os.environ["ACTIVE_MODEL"] = model
+
+    # You might also want to store this setting in a file for persistence
+    # across server restarts, depending on your requirements
+
+    return jsonify({"success": True})
+
+
 def run():
     # Access model selection preference if it's available
     model_choice = getattr(utils, 'selected_model', 'claude')
