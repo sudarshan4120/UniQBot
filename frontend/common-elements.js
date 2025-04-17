@@ -39,35 +39,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 3. Inject chatbot widget only if NOT on contact page
     if (currentPage !== 'contact.html') {
-        const chatbotHTML = `
-            <div id="chatbot-widget" class="chatbot-collapsed">
-                <div class="speech-bubble">Woof Woof!</div>
-                <div class="chatbot-header">
-                    <span>Husky Helper</span>
-                    <button id="chatbot-toggle">
-                        <img src="settings-icon.png" alt="Settings" class="settings-icon">
-                    </button>
+    const chatbotHTML = `
+        <div id="chatbot-widget" class="chatbot-collapsed">
+            <div class="speech-bubble">Woof Woof!</div>
+            <div class="chatbot-header">
+                <span>Husky Helper</span>
+                <button id="chatbot-toggle">
+                    <img src="settings-icon.png" alt="Settings" class="settings-icon">
+                </button>
+            </div>
+            <div class="chatbot-body">
+                <div id="chatbot-messages"></div>
+                <div class="chatbot-settings" id="chatbot-settings" style="display: none;">
+                    <h3>Chatbot Settings</h3>
+                    <div class="settings-group">
+                        <label class="settings-label">Select Model:</label>
+                        <div class="model-buttons">
+                            <button id="claude-button" class="model-button active">Claude Haiku</button>
+                            <button id="gpt-button" class="model-button">Open AI GPT</button>
+                        </div>
+                    </div>
+                    <button id="save-settings">Save Settings</button>
                 </div>
-                <div class="chatbot-body">
-                    <div id="chatbot-messages"></div>
-                    <div class="chatbot-settings" id="chatbot-settings" style="display: none;">
-                                <h3>Chatbot Settings</h3>
-                                    <div class="settings-group">
-                                        <label>Select Model:</label>
-                                    <div class="model-buttons">
-                                        <button id="claude-button" class="model-button active">Claude</button>
-                                        <button id="gpt-button" class="model-button">GPT</button>
-                                    </div>
-                                </div>
-                                <button id="save-settings" class="settings-btn">Save Settings</button>
-                    </div>
-                    <div class="chatbot-input-container">
-                        <input type="text" id="chatbot-input" placeholder="Ask a question...">
-                        <button id="chatbot-send">Send</button>
-                    </div>
+                <div class="chatbot-input-container">
+                    <input type="text" id="chatbot-input" placeholder="Ask a question...">
+                    <button id="chatbot-send">Send</button>
                 </div>
             </div>
-        `;
+        </div>
+    `;
 
         // Insert chatbot widget before the end of body
         document.body.insertAdjacentHTML('beforeend', chatbotHTML);
