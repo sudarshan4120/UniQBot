@@ -1,7 +1,8 @@
 # PAWSISTANT
 > RAG Chatbot for Northeastern University
-> 
-> (A demonstration video is currently in development and will be available on my YouTube soon.)
+
+[![Play on YouTube](https://img.shields.io/badge/PLay_on_YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://www.youtube.com/watch?v=VJuLMpn4fjg)
+
 
 ![Website HomePage](media/chatbot.gif)
 
