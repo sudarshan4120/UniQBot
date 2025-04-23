@@ -1,11 +1,12 @@
 # PAWSISTANT
 > RAG Chatbot for Northeastern University
 
-[![Play on YouTube](https://img.shields.io/badge/PLay_on_YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://www.youtube.com/watch?v=VJuLMpn4fjg)
-
-
 ![Website HomePage](media/chatbot.gif)
 
+## Contributors:
+- Sudarshan Paranjape
+- Shreyashri Athani
+- Naman Singhal
 ## Table of Contents
 * [Overview](#overview)
 * [Features](#features)
